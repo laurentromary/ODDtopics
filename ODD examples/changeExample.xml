@@ -36,6 +36,20 @@
                 <moduleRef key="header" except=""/>
                 <moduleRef key="textstructure" except=""/>
                 <moduleRef key="dictionaries" except=""/>
+                <elementSpec ident="entry" mode="change">
+                    <exemplum>
+                        <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                            <entry xml:it="e-chat" xml:lang="fr">
+                                <form>
+                                    <orth>chat</orth>
+                                </form>
+                                <gramGrp>
+                                    <pos>n</pos>
+                                </gramGrp>
+                            </entry>
+                        </egXML>
+                    </exemplum>
+                </elementSpec>
             </schemaSpec>
         </body>
     </text>
