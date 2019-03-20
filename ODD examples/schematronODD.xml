@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:lang="en"
+  xmlns:sch="http://purl.oclc.org/dsdl/schematron">
+  <teiHeader>
+    <fileDesc>
+      <titleStmt>
+        <title>TEI extension examplifying the use of Schematron rules in an element
+          specification</title>
+        <author>
+          <persName>
+            <forename>Charles</forename>
+            <surname>Riondet</surname>
+          </persName>
+        </author>
+      </titleStmt>
+      <publicationStmt>
+        <authority>the author</authority>
+        <availability>
+          <licence target="http://creativecommons.org/licenses/by/3.0/">
+            <p>The Creative Commons Attribution 3.0 Unported (CC BY 3.0) Licence applies to this
+              document.</p>
+          </licence>
+        </availability>
+      </publicationStmt>
+      <sourceDesc>
+        <p>created on Wednesday 20th March 2019 10:30:33 AM</p>
+      </sourceDesc>
+    </fileDesc>
+  </teiHeader>
+  <text>
+    <front>
+      <divGen type="toc"/>
+    </front>
+    <body>
+      <p>My TEI Customization starts with modules tei, core, textstructure and header</p>
+      <schemaSpec ident="myTEI" docLang="en" prefix="tei_" xml:lang="en">
+        <moduleRef key="core" except=""/>
+        <moduleRef key="tei" except=""/>
+        <moduleRef key="header" except=""/>
+        <moduleRef key="textstructure" except=""/>
+        <moduleRef key="tagdocs" except=""/>
+        <moduleRef key="namesdates" except=""/>
+
+        <elementSpec ident="TEI" mode="change">
+          <constraintSpec ident="xmlid" scheme="schematron" type="SSK">
+            <constraint>
+              <sch:rule context="tei:TEI">
+                <sch:let name="fileName" value="tokenize(document-uri(/), '/')[last()]"/>
+                <sch:assert test="string(@xml:id) = substring-before($fileName, '.xml')" role="error">
+                  The xml:id of the TEI element should be equal to the name of the
+                  file, without the file extension. Currently the value of xml:id is "<sch:value-of select="@xml:id"/>" 
+                  whilst the file name is "<sch:value-of select="$fileName"/>"
+                </sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec>
+        </elementSpec>
+
+      </schemaSpec>
+    </body>
+  </text>
+</TEI>
